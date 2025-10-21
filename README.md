@@ -14,10 +14,10 @@ This repository contains Jupyter notebooks and Python scripts for analyzing neut
 ## Files
 
 - `ST.ipynb` - Main analysis notebook for sin²θ_W studies
-- `sintheta.ipynb` - Core sin theta analysis
-- `sintheta_HE.ipynb` - High-energy neutrino analysis
+- `sintheta.ipynb` - Old Analysis (for reference only)
+- `sintheta_HE.ipynb` - Old Analysis (for reference only)
 - `vis_data.ipynb` - Data visualization notebook
-- `insideness.py` - Utility functions
+- `insideness.py` - Utility functions - to be done
 
 ## Requirements
 
