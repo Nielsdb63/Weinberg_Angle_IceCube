@@ -1,49 +1,21 @@
-# SinTheta_Aug2025
+This folder contains files trying to find the Weinberg from data gotten with Icecube.
 
-Analysis of neutrino physics data for sin²θ_W measurements and related studies.
+ST_final.ipynb is the most up to date file, resulting in the findings of 4modes_3sin2t_smear_1.png
 
-## Overview
+the Modes refer to the 'resampling' of the energy (E) and/or track/cascade (T). Resampling refers to the smearing of the truth into prediction and works in the following way.
 
-This repository contains Jupyter notebooks and Python scripts for analyzing neutrino interaction data, specifically focusing on:
+First, bin the True energy into 40 bins: (40 because MCEq works with 40 bins, and thus the weights are for each of the 40 bins).
 
-- sin²θ_W (Weinberg angle) measurements
-- Neutrino flavor ratio analysis  
-- NC/CC (Neutral Current/Charged Current) interaction studies
-- High-energy neutrino physics
+then, for each event in the bin, collect the predicted energies (by a GNN [see GNN_ET]). This these predicted values are the uncertainty of the reconstruction. So, to smear it, for each event in the bin take a random predicted energy of the collection, as the energy. Each event keeps its original weight and track_mu_pred value. That is how the energy smearing works.
 
-## Files
+The track smearing also works per true energy bin, but smears the track_mu (truth) with the track_mu_pred instead. 
 
-- `ST.ipynb` - Main analysis notebook for sin²θ_W studies
-- `sintheta.ipynb` - Old Analysis (for reference only)
-- `sintheta_HE.ipynb` - Old Analysis (for reference only)
-- `vis_data.ipynb` - Data visualization notebook
-- `insideness.py` - Utility functions - to be done
+That is what the sin2w=0.222 line does, as that is the true sine^w(weinberg angle). The other lines are 'What if sine2theta was this value instead'.  If s2t was smaller (bigger), there would be more (less) NC events, compared to CC events. So before the resampling the events are weighed to include this ratio change. 
 
-## Requirements
+The idea is to get the GNNs to be better, such that smearing is less, and to run them on data, so that we can include a data line with hopefully the same shape as the resampled MCs. Then there will be one sine2theta which is closest to the dataline, which will be the 'correct' value according to data.
 
-- Python 3.8+
-- Jupyter Notebook
-- NumPy
-- Pandas
-- Matplotlib
-- MCEq (Monte Carlo for cosmic ray interactions)
-- crflux (Cosmic ray flux models)
 
-## Usage
+All that is in ST_final.ipynb.
+In order for that to run, MCEq_fluxes.py makes mceq_zenith_averaged_fluxes.csv for weighing, and combine_E_T.py takes the best GNN_E and GNN_T models (see \GNN_ET) and gets the MC data. 
 
-1. Clone this repository
-2. Install required dependencies
-3. Open Jupyter notebooks to run analyses
-4. Modify parameters as needed for your specific studies
-
-## Data
-
-This analysis uses Monte Carlo neutrino simulation data. Data files are not included in the repository due to size constraints.
-
-## Contact
-
-Created for IceCube neutrino physics research.
-
-## License
-
-Academic/Research use only.
+ST_old.ipynb and ST_investigation.ipynb are old versions of ST_final, that only exist for refernce
