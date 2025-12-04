@@ -52,8 +52,8 @@ def load_and_merge(energy_csv: str, track_csv: str) -> pd.DataFrame:
 
 def main():
 
-	energy_csv = '/groups/icecube/nielsdb/GNN_ET/validation/Energy/GNN_E_val_prediction_GNN_ET_MC_2M_161125.csv'
-	track_csv = '/groups/icecube/nielsdb/GNN_ET/validation/Track/GNN_T_val_prediction_GNN_ET_MC_2M_111125.csv'
+	energy_csv = '/groups/icecube/nielsdb/GNN_ET/validation/Energy/GNN_E_val_prediction_GNN_ET_MC_10M_231125.csv'
+	track_csv = '/groups/icecube/nielsdb/GNN_ET/validation/Track/GNN_T_val_prediction_GNN_ET_MC_10M_231125.csv'
 	
 	if not os.path.exists(energy_csv):
 		print(f"Energy CSV not found: {energy_csv}", file=sys.stderr)
@@ -65,7 +65,7 @@ def main():
 	out_df = load_and_merge(energy_csv, track_csv)
 	
     #naming convention: combined_ET_val_prediction_<db_name_of_E_T>_<energy_file_id>_<track_file_id>.csv
-	out_path = '/groups/icecube/nielsdb/SinTheta_Aug2025/combined_ET_val_prediction_GNN_ET_MC_2M_161125_111125.csv'
+	out_path = '/groups/icecube/nielsdb/SinTheta_Aug2025/combined_ET_val_prediction_GNN_ET_MC_10M_231125_231125.csv'
 
 	out_df.to_csv(out_path, index=False)
 	print(f"Wrote combined CSV: {out_path}  (rows: {len(out_df):,})")
